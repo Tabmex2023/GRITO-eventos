@@ -1,0 +1,2170 @@
+Klar. Wir bauen die `index.html` jetzt schon so, dass sie später mit `css/style.css` und `js/script.js` vollständig funktioniert.
+
+```html
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        GRITO Eventos | Mobiliario, Decoración y Climatización en Guamúchil
+    </title>
+
+    <meta
+        name="description"
+        content="Renta de mobiliario, decoración y climatización para bodas, XV años, cumpleaños y eventos en Guamúchil, Sinaloa y alrededores."
+    >
+
+    <meta
+        name="keywords"
+        content="renta de sillas Guamúchil, renta de mesas Guamúchil, decoración de eventos Guamúchil, renta para bodas Guamúchil, renta para XV años Guamúchil, decoración para eventos Guamúchil, aire acondicionado para eventos Guamúchil, mobiliario para eventos Guamúchil"
+    >
+
+    <meta name="author" content="GRITO Eventos">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="GRITO Eventos | Guamúchil">
+    <meta
+        property="og:description"
+        content="Mobiliario, decoración y climatización para tus eventos en Guamúchil y alrededores."
+    >
+    <meta property="og:locale" content="es_MX">
+
+    <!-- Favicon – posteriormente podemos agregar uno -->
+    <link rel="icon" href="data:,">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- =========================================================
+         HEADER / NAVEGACIÓN
+         ========================================================= -->
+
+    <header class="site-header" id="inicio">
+
+        <div class="container header-inner">
+
+            <a href="index.html" class="brand" aria-label="GRITO Eventos - Inicio">
+                <span class="brand-name">GRITO</span>
+                <span class="brand-subtitle">Eventos</span>
+            </a>
+
+            <button
+                class="mobile-menu-toggle"
+                type="button"
+                aria-label="Abrir menú"
+                aria-expanded="false"
+                aria-controls="main-navigation"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="main-navigation" id="main-navigation">
+
+                <a href="#inicio">Inicio</a>
+
+                <a href="#servicios">Servicios</a>
+
+                <a href="#paquetes">Paquetes</a>
+
+                <a href="#nosotros">Nosotros</a>
+
+                <a href="#faq">Preguntas frecuentes</a>
+
+                <a href="#contacto" class="nav-cta">
+                    Solicitar cotización
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- =====================================================
+             HERO
+             ===================================================== -->
+
+        <section class="hero">
+
+            <div class="hero-image">
+
+                <!--
+                    IMAGEN HERO
+                    Reemplaza la URL de abajo por tu imagen de Postimages.
+
+                    Ejemplo:
+                    https://i.postimg.cc/xxxxx/mi-foto.jpg
+                -->
+
+                <img
+                    src="https://placehold.co/1800x1100/f4efe7/8f806d?text=GRITO+Eventos"
+                    alt="Evento elegante organizado por GRITO Eventos"
+                >
+
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-content">
+
+                <span class="eyebrow">
+                    GUAMÚCHIL · SINALOA
+                </span>
+
+                <h1>
+                    Tu evento.<br>
+                    <span>Nuestra experiencia.</span>
+                </h1>
+
+                <p>
+                    Mobiliario, decoración y climatización para crear
+                    celebraciones bonitas, cómodas y bien organizadas.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a
+                        href="#configurador"
+                        class="btn btn-primary"
+                    >
+                        Arma tu evento
+                    </a>
+
+                    <a
+                        href="#servicios"
+                        class="btn btn-secondary"
+                    >
+                        Ver nuestros servicios
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             INTRODUCCIÓN
+             ===================================================== -->
+
+        <section class="intro section">
+
+            <div class="container intro-grid">
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        GRITO EVENTOS
+                    </span>
+
+                    <h2>
+                        Todo lo que necesitas para
+                        <span>celebrar.</span>
+                    </h2>
+
+                </div>
+
+                <div class="intro-text">
+
+                    <p>
+                        En GRITO Eventos nos encargamos de hacer que
+                        organizar tu evento sea más sencillo.
+                    </p>
+
+                    <p>
+                        Ponemos a tu disposición mobiliario, decoración,
+                        climatización y servicios de entrega y montaje,
+                        adaptándonos a lo que realmente necesitas.
+                    </p>
+
+                    <a href="#configurador" class="text-link">
+                        Cuéntanos qué estás planeando
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CONFIGURADOR
+             ===================================================== -->
+
+        <section class="configurator-section section" id="configurador">
+
+            <div class="container">
+
+                <div class="section-heading centered">
+
+                    <span class="eyebrow">
+                        COTIZACIÓN PERSONALIZADA
+                    </span>
+
+                    <h2>
+                        Arma tu <span>evento</span>
+                    </h2>
+
+                    <p>
+                        Cuéntanos qué necesitas y prepara tu solicitud
+                        en menos de un minuto.
+                    </p>
+
+                </div>
+
+
+                <div class="configurator">
+
+                    <!-- Barra de progreso -->
+
+                    <div class="configurator-progress">
+
+                        <div class="progress-step active" data-step="1">
+                            <span>1</span>
+                            <small>Evento</small>
+                        </div>
+
+                        <div class="progress-line"></div>
+
+                        <div class="progress-step" data-step="2">
+                            <span>2</span>
+                            <small>Personas</small>
+                        </div>
+
+                        <div class="progress-line"></div>
+
+                        <div class="progress-step" data-step="3">
+                            <span>3</span>
+                            <small>Necesidades</small>
+                        </div>
+
+                        <div class="progress-line"></div>
+
+                        <div class="progress-step" data-step="4">
+                            <span>4</span>
+                            <small>Fecha</small>
+                        </div>
+
+                        <div class="progress-line"></div>
+
+                        <div class="progress-step" data-step="5">
+                            <span>5</span>
+                            <small>Ubicación</small>
+                        </div>
+
+                        <div class="progress-line"></div>
+
+                        <div class="progress-step" data-step="6">
+                            <span>6</span>
+                            <small>Contacto</small>
+                        </div>
+
+                    </div>
+
+
+                    <form id="event-configurator" novalidate>
+
+                        <!-- =====================================
+                             PASO 1
+                             ===================================== -->
+
+                        <div
+                            class="config-step active"
+                            data-step="1"
+                        >
+
+                            <div class="step-heading">
+
+                                <span class="step-number">
+                                    01
+                                </span>
+
+                                <div>
+                                    <h3>
+                                        ¿Qué tipo de evento tienes?
+                                    </h3>
+
+                                    <p>
+                                        Selecciona la opción que mejor
+                                        describe tu celebración.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="option-grid event-type-grid">
+
+                                <button
+                                    type="button"
+                                    class="option-card"
+                                    data-event-type="Boda"
+                                >
+                                    <span class="option-icon">♡</span>
+                                    <span>Boda</span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="option-card"
+                                    data-event-type="XV años"
+                                >
+                                    <span class="option-icon">✦</span>
+                                    <span>XV años</span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="option-card"
+                                    data-event-type="Cumpleaños"
+                                >
+                                    <span class="option-icon">○</span>
+                                    <span>Cumpleaños</span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="option-card"
+                                    data-event-type="Bautizo"
+                                >
+                                    <span class="option-icon">✧</span>
+                                    <span>Bautizo</span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="option-card"
+                                    data-event-type="Baby shower"
+                                >
+                                    <span class="option-icon">♡</span>
+                                    <span>Baby shower</span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="option-card"
+                                    data-event-type="Evento empresarial"
+                                >
+                                    <span class="option-icon">▱</span>
+                                    <span>Evento empresarial</span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="option-card"
+                                    data-event-type="Evento familiar"
+                                >
+                                    <span class="option-icon">⌂</span>
+                                    <span>Evento familiar</span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="option-card"
+                                    data-event-type="Otro"
+                                >
+                                    <span class="option-icon">+</span>
+                                    <span>Otro</span>
+                                </button>
+
+                            </div>
+
+
+                            <div class="step-actions">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-primary next-step"
+                                >
+                                    Continuar
+                                    <span>→</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =====================================
+                             PASO 2
+                             ===================================== -->
+
+                        <div
+                            class="config-step"
+                            data-step="2"
+                        >
+
+                            <div class="step-heading">
+
+                                <span class="step-number">
+                                    02
+                                </span>
+
+                                <div>
+                                    <h3>
+                                        ¿Cuántas personas?
+                                    </h3>
+
+                                    <p>
+                                        Esto nos ayuda a preparar mejor
+                                        tu cotización.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="guest-options">
+
+                                <button
+                                    type="button"
+                                    class="guest-option"
+                                    data-guests="10"
+                                >
+                                    10
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="guest-option"
+                                    data-guests="20"
+                                >
+                                    20
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="guest-option"
+                                    data-guests="30"
+                                >
+                                    30
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="guest-option"
+                                    data-guests="40"
+                                >
+                                    40
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="guest-option"
+                                    data-guests="50"
+                                >
+                                    50
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="guest-option"
+                                    data-guests="75"
+                                >
+                                    75
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="guest-option"
+                                    data-guests="100"
+                                >
+                                    100
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="guest-option"
+                                    data-guests="150+"
+                                >
+                                    150+
+                                </button>
+
+                            </div>
+
+
+                            <div class="custom-number">
+
+                                <label for="custom-guests">
+                                    O indica un número personalizado
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="custom-guests"
+                                    name="custom-guests"
+                                    min="1"
+                                    max="10000"
+                                    placeholder="Ej. 65"
+                                >
+
+                            </div>
+
+
+                            <div class="step-actions">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline previous-step"
+                                >
+                                    ← Regresar
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-primary next-step"
+                                >
+                                    Continuar →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =====================================
+                             PASO 3
+                             ===================================== -->
+
+                        <div
+                            class="config-step"
+                            data-step="3"
+                        >
+
+                            <div class="step-heading">
+
+                                <span class="step-number">
+                                    03
+                                </span>
+
+                                <div>
+                                    <h3>
+                                        ¿Qué necesitas?
+                                    </h3>
+
+                                    <p>
+                                        Puedes seleccionar varias opciones.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="needs-grid">
+
+                                <div class="needs-category">
+
+                                    <h4>Mobiliario</h4>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Sillas"
+                                        >
+                                        <span>Sillas</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Mesas"
+                                        >
+                                        <span>Mesas</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Mesas tipo cóctel"
+                                        >
+                                        <span>Mesas tipo cóctel</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Mesas para buffet"
+                                        >
+                                        <span>Mesas para buffet</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Mantelería"
+                                        >
+                                        <span>Mantelería</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Decoración para sillas"
+                                        >
+                                        <span>Decoración para sillas</span>
+                                    </label>
+
+                                </div>
+
+
+                                <div class="needs-category">
+
+                                    <h4>Decoración</h4>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Centros de mesa"
+                                        >
+                                        <span>Centros de mesa</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Arco decorativo"
+                                        >
+                                        <span>Arco decorativo</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Fondo para fotos"
+                                        >
+                                        <span>Fondo para fotos</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Decoración floral"
+                                        >
+                                        <span>Decoración floral</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Velas / iluminación"
+                                        >
+                                        <span>Velas / iluminación</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Decoración personalizada"
+                                        >
+                                        <span>Decoración personalizada</span>
+                                    </label>
+
+                                </div>
+
+
+                                <div class="needs-category">
+
+                                    <h4>Climatización</h4>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Aire acondicionado portátil"
+                                        >
+                                        <span>
+                                            Aire acondicionado portátil
+                                        </span>
+                                    </label>
+
+                                </div>
+
+
+                                <div class="needs-category">
+
+                                    <h4>Energía</h4>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Planta de luz / generador"
+                                        >
+                                        <span>
+                                            Planta de luz / generador
+                                        </span>
+                                    </label>
+
+                                </div>
+
+
+                                <div class="needs-category">
+
+                                    <h4>Servicio</h4>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Entrega"
+                                        >
+                                        <span>Entrega</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Montaje"
+                                        >
+                                        <span>Montaje</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Desmontaje"
+                                        >
+                                        <span>Desmontaje</span>
+                                    </label>
+
+                                    <label class="check-option">
+                                        <input
+                                            type="checkbox"
+                                            name="needs"
+                                            value="Recolección"
+                                        >
+                                        <span>Recolección</span>
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="step-actions">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline previous-step"
+                                >
+                                    ← Regresar
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-primary next-step"
+                                >
+                                    Continuar →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =====================================
+                             PASO 4
+                             ===================================== -->
+
+                        <div
+                            class="config-step"
+                            data-step="4"
+                        >
+
+                            <div class="step-heading">
+
+                                <span class="step-number">
+                                    04
+                                </span>
+
+                                <div>
+                                    <h3>
+                                        ¿Cuándo es tu evento?
+                                    </h3>
+
+                                    <p>
+                                        Indícanos la fecha para revisar
+                                        disponibilidad.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="event-date">
+                                    Fecha del evento
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="event-date"
+                                    name="event-date"
+                                    required
+                                >
+
+                                <small>
+                                    La disponibilidad se confirma al
+                                    momento de cotizar.
+                                </small>
+
+                            </div>
+
+
+                            <div class="step-actions">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline previous-step"
+                                >
+                                    ← Regresar
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-primary next-step"
+                                >
+                                    Continuar →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =====================================
+                             PASO 5
+                             ===================================== -->
+
+                        <div
+                            class="config-step"
+                            data-step="5"
+                        >
+
+                            <div class="step-heading">
+
+                                <span class="step-number">
+                                    05
+                                </span>
+
+                                <div>
+                                    <h3>
+                                        ¿Dónde será?
+                                    </h3>
+
+                                    <p>
+                                        Necesitamos conocer la ubicación
+                                        para considerar la logística.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+
+                                    <label for="event-location">
+                                        Ubicación del evento
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="event-location"
+                                        name="event-location"
+                                        placeholder="Ej. Guamúchil, Sinaloa"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label for="event-area">
+                                        Colonia / comunidad
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="event-area"
+                                        name="event-area"
+                                        placeholder="Opcional"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="step-actions">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline previous-step"
+                                >
+                                    ← Regresar
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-primary next-step"
+                                >
+                                    Continuar →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =====================================
+                             PASO 6
+                             ===================================== -->
+
+                        <div
+                            class="config-step"
+                            data-step="6"
+                        >
+
+                            <div class="step-heading">
+
+                                <span class="step-number">
+                                    06
+                                </span>
+
+                                <div>
+                                    <h3>
+                                        Cuéntanos cómo contactarte
+                                    </h3>
+
+                                    <p>
+                                        Te enviaremos la cotización por
+                                        WhatsApp.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+
+                                    <label for="customer-name">
+                                        Nombre
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="customer-name"
+                                        name="customer-name"
+                                        placeholder="Tu nombre"
+                                        autocomplete="name"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label for="customer-whatsapp">
+                                        WhatsApp
+                                    </label>
+
+                                    <input
+                                        type="tel"
+                                        id="customer-whatsapp"
+                                        name="customer-whatsapp"
+                                        placeholder="Ej. 673 123 4567"
+                                        autocomplete="tel"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="additional-message">
+                                    Mensaje adicional
+                                </label>
+
+                                <textarea
+                                    id="additional-message"
+                                    name="additional-message"
+                                    rows="5"
+                                    placeholder="Cuéntanos cualquier detalle importante de tu evento..."
+                                ></textarea>
+
+                            </div>
+
+
+                            <div class="quote-notice">
+
+                                <span class="notice-icon">
+                                    ✓
+                                </span>
+
+                                <p>
+                                    Esta solicitud no genera una reserva
+                                    automática. Primero revisaremos
+                                    disponibilidad y te enviaremos una
+                                    cotización personalizada.
+                                </p>
+
+                            </div>
+
+
+                            <div class="step-actions">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline previous-step"
+                                >
+                                    ← Regresar
+                                </button>
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-whatsapp"
+                                >
+                                    Solicitar cotización por WhatsApp
+                                    <span>↗</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SERVICIOS
+             ===================================================== -->
+
+        <section class="services section" id="servicios">
+
+            <div class="container">
+
+                <div class="section-heading centered">
+
+                    <span class="eyebrow">
+                        LO QUE HACEMOS
+                    </span>
+
+                    <h2>
+                        Todo en un <span>solo lugar.</span>
+                    </h2>
+
+                    <p>
+                        Soluciones para que puedas concentrarte en
+                        disfrutar tu celebración.
+                    </p>
+
+                </div>
+
+
+                <div class="services-grid">
+
+                    <!-- Servicio 1 -->
+
+                    <article class="service-card">
+
+                        <div class="service-image">
+
+                            <!-- Reemplazar por URL de Postimages -->
+
+                            <img
+                                src="https://placehold.co/900x700/f4efe7/8f806d?text=Mobiliario"
+                                alt="Mobiliario para eventos en Guamúchil"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                        <div class="service-content">
+
+                            <span class="service-number">
+                                01
+                            </span>
+
+                            <h3>
+                                Mobiliario
+                            </h3>
+
+                            <p>
+                                Sillas, mesas, mesas tipo cóctel,
+                                mantelería y detalles para complementar
+                                tu evento.
+                            </p>
+
+                            <a href="servicios.html" class="text-link">
+                                Conocer más <span>→</span>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Servicio 2 -->
+
+                    <article class="service-card">
+
+                        <div class="service-image">
+
+                            <img
+                                src="https://placehold.co/900x700/f4efe7/8f806d?text=Decoracion"
+                                alt="Decoración para eventos en Guamúchil"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                        <div class="service-content">
+
+                            <span class="service-number">
+                                02
+                            </span>
+
+                            <h3>
+                                Decoración
+                            </h3>
+
+                            <p>
+                                Diseñamos y elaboramos parte de nuestra
+                                decoración para crear ambientes especiales
+                                para cada ocasión.
+                            </p>
+
+                            <a href="servicios.html" class="text-link">
+                                Conocer más <span>→</span>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Servicio 3 -->
+
+                    <article class="service-card">
+
+                        <div class="service-image">
+
+                            <img
+                                src="https://placehold.co/900x700/f4efe7/8f806d?text=Climatizacion"
+                                alt="Aire acondicionado portátil para eventos"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                        <div class="service-content">
+
+                            <span class="service-number">
+                                03
+                            </span>
+
+                            <h3>
+                                Climatización
+                            </h3>
+
+                            <p>
+                                Opciones de aire acondicionado portátil
+                                para ayudar a mantener cómodo tu evento.
+                            </p>
+
+                            <a href="servicios.html" class="text-link">
+                                Conocer más <span>→</span>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Servicio 4 -->
+
+                    <article class="service-card">
+
+                        <div class="service-image">
+
+                            <img
+                                src="https://placehold.co/900x700/f4efe7/8f806d?text=Entrega+y+Montaje"
+                                alt="Entrega y montaje de eventos"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                        <div class="service-content">
+
+                            <span class="service-number">
+                                04
+                            </span>
+
+                            <h3>
+                                Entrega y montaje
+                            </h3>
+
+                            <p>
+                                Nos encargamos de la logística para que
+                                tu mobiliario y decoración estén listos
+                                cuando los necesites.
+                            </p>
+
+                            <a href="servicios.html" class="text-link">
+                                Conocer más <span>→</span>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             DECORACIÓN HECHA A MANO
+             ===================================================== -->
+
+        <section class="handmade section">
+
+            <div class="container handmade-grid">
+
+                <div class="handmade-image">
+
+                    <!-- IMAGEN POSTIMAGES -->
+
+                    <img
+                        src="https://placehold.co/1000x1200/f4efe7/8f806d?text=Decoracion+GRITO"
+                        alt="Decoración creada especialmente por GRITO Eventos"
+                        loading="lazy"
+                    >
+
+                </div>
+
+
+                <div class="handmade-content">
+
+                    <span class="eyebrow">
+                        UN DETALLE QUE NOS DISTINGUE
+                    </span>
+
+                    <h2>
+                        Decoración creada
+                        <span>especialmente para ti.</span>
+                    </h2>
+
+                    <p>
+                        En GRITO Eventos creemos que cada celebración
+                        debe sentirse única.
+                    </p>
+
+                    <p>
+                        Por eso, parte de nuestra decoración es diseñada
+                        y elaborada por Griselda, cuidando cada detalle
+                        para crear ambientes especiales para cada ocasión.
+                    </p>
+
+
+                    <div class="usp-list">
+
+                        <div class="usp-item">
+
+                            <span>01</span>
+
+                            <div>
+                                <strong>
+                                    Diseño personalizado
+                                </strong>
+
+                                <p>
+                                    Adaptamos los detalles a tu evento.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="usp-item">
+
+                            <span>02</span>
+
+                            <div>
+                                <strong>
+                                    Hecho con dedicación
+                                </strong>
+
+                                <p>
+                                    Cada elemento recibe atención especial.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="usp-item">
+
+                            <span>03</span>
+
+                            <div>
+                                <strong>
+                                    Detalles únicos
+                                </strong>
+
+                                <p>
+                                    Buscamos que tu celebración tenga
+                                    personalidad propia.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="nosotros.html"
+                        class="btn btn-outline"
+                    >
+                        Conoce nuestra historia
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PAQUETES
+             ===================================================== -->
+
+        <section class="packages section" id="paquetes">
+
+            <div class="container">
+
+                <div class="section-heading centered">
+
+                    <span class="eyebrow">
+                        OPCIONES PARA EMPEZAR
+                    </span>
+
+                    <h2>
+                        Paquetes para tu <span>evento.</span>
+                    </h2>
+
+                    <p>
+                        Puedes elegir un paquete o combinar los servicios
+                        que realmente necesitas.
+                    </p>
+
+                </div>
+
+
+                <div class="packages-grid">
+
+                    <!-- Esencial -->
+
+                    <article class="package-card">
+
+                        <div class="package-top">
+
+                            <span class="package-label">
+                                PARA CELEBRACIONES PEQUEÑAS
+                            </span>
+
+                            <h3>
+                                Paquete Esencial
+                            </h3>
+
+                            <p>
+                                Una base práctica para comenzar
+                                a organizar tu evento.
+                            </p>
+
+                        </div>
+
+
+                        <ul class="package-list">
+
+                            <li>Sillas</li>
+                            <li>Mesas</li>
+                            <li>Mantelería</li>
+                            <li>Decoración básica</li>
+
+                        </ul>
+
+
+                        <a
+                            href="#configurador"
+                            class="btn btn-outline"
+                        >
+                            Solicitar cotización
+                        </a>
+
+                    </article>
+
+
+                    <!-- Celebración -->
+
+                    <article class="package-card featured">
+
+                        <div class="package-top">
+
+                            <span class="package-label">
+                                CUMPLEAÑOS · XV · FAMILIARES
+                            </span>
+
+                            <h3>
+                                Paquete Celebración
+                            </h3>
+
+                            <p>
+                                Para quienes quieren darle un toque
+                                especial a su celebración.
+                            </p>
+
+                        </div>
+
+
+                        <ul class="package-list">
+
+                            <li>Sillas</li>
+                            <li>Mesas</li>
+                            <li>Mantelería</li>
+                            <li>Centros de mesa</li>
+                            <li>Decoración</li>
+                            <li>Entrega</li>
+
+                        </ul>
+
+
+                        <a
+                            href="#configurador"
+                            class="btn btn-primary"
+                        >
+                            Solicitar cotización
+                        </a>
+
+                    </article>
+
+
+                    <!-- Boda -->
+
+                    <article class="package-card">
+
+                        <div class="package-top">
+
+                            <span class="package-label">
+                                PARA BODAS
+                            </span>
+
+                            <h3>
+                                Paquete Boda
+                            </h3>
+
+                            <p>
+                                Una combinación elegante para uno
+                                de los días más importantes.
+                            </p>
+
+                        </div>
+
+
+                        <ul class="package-list">
+
+                            <li>Sillas</li>
+                            <li>Mesas</li>
+                            <li>Mantelería</li>
+                            <li>Centros de mesa</li>
+                            <li>Decoración</li>
+                            <li>Arco decorativo</li>
+                            <li>Decoración floral</li>
+                            <li>Montaje</li>
+
+                        </ul>
+
+
+                        <a
+                            href="#configurador"
+                            class="btn btn-outline"
+                        >
+                            Solicitar cotización
+                        </a>
+
+                    </article>
+
+
+                    <!-- Completo -->
+
+                    <article class="package-card">
+
+                        <div class="package-top">
+
+                            <span class="package-label">
+                                SOLUCIÓN INTEGRAL
+                            </span>
+
+                            <h3>
+                                Paquete Completo
+                            </h3>
+
+                            <p>
+                                Una solución más completa para
+                                simplificar la organización.
+                            </p>
+
+                        </div>
+
+
+                        <ul class="package-list">
+
+                            <li>Mobiliario</li>
+                            <li>Decoración</li>
+                            <li>Climatización</li>
+                            <li>Entrega</li>
+                            <li>Montaje</li>
+                            <li>Desmontaje</li>
+
+                        </ul>
+
+
+                        <a
+                            href="#configurador"
+                            class="btn btn-outline"
+                        >
+                            Solicitar cotización
+                        </a>
+
+                    </article>
+
+                </div>
+
+
+                <p class="package-note">
+                    Las cantidades y servicios de cada paquete pueden
+                    adaptarse según las necesidades de tu evento.
+                    La disponibilidad y cotización se confirman
+                    individualmente.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             MOMENTOS GRITO
+             Sin galería. Solo unas pocas imágenes.
+             ===================================================== -->
+
+        <section class="moments section">
+
+            <div class="container">
+
+                <div class="moments-header">
+
+                    <div class="section-heading">
+
+                        <span class="eyebrow">
+                            MOMENTOS GRITO
+                        </span>
+
+                        <h2>
+                            Los detalles hacen
+                            <span>la diferencia.</span>
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        Una pequeña muestra del estilo que queremos
+                        llevar a cada celebración.
+                    </p>
+
+                </div>
+
+
+                <div class="moments-grid">
+
+                    <div class="moment-large">
+
+                        <!-- POSTIMAGES -->
+
+                        <img
+                            src="https://placehold.co/1200x900/f4efe7/8f806d?text=Evento+GRITO"
+                            alt="Montaje elegante para evento"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="moment-small">
+
+                        <!-- POSTIMAGES -->
+
+                        <img
+                            src="https://placehold.co/800x900/f4efe7/8f806d?text=Decoracion"
+                            alt="Detalle de decoración para evento"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="moment-small">
+
+                        <!-- POSTIMAGES -->
+
+                        <img
+                            src="https://placehold.co/800x900/f4efe7/8f806d?text=Mobiliario"
+                            alt="Mobiliario para celebración"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             NOSOTROS
+             ===================================================== -->
+
+        <section class="about section" id="nosotros">
+
+            <div class="container about-grid">
+
+                <div class="about-content">
+
+                    <span class="eyebrow">
+                        NUESTRA HISTORIA
+                    </span>
+
+                    <h2>
+                        GRITO nace de una
+                        combinación <span>muy especial.</span>
+                    </h2>
+
+                    <p>
+                        GRITO Eventos nació de la unión de Griselda y Tobi,
+                        con la idea de crear un servicio de eventos cercano,
+                        profesional y diferente.
+                    </p>
+
+                    <p>
+                        Griselda es la propietaria del negocio y está
+                        detrás del diseño y elaboración de parte de nuestra
+                        decoración.
+                    </p>
+
+                    <p>
+                        Tobi aporta una perspectiva internacional enfocada
+                        en organización, atención al detalle y servicio.
+                    </p>
+
+                    <p>
+                        Raíces mexicanas, una visión internacional y,
+                        sobre todo, el deseo de crear celebraciones que
+                        realmente se recuerden.
+                    </p>
+
+                    <a
+                        href="nosotros.html"
+                        class="text-link"
+                    >
+                        Conoce más sobre GRITO
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+
+                <div class="about-image">
+
+                    <!-- POSTIMAGES -->
+
+                    <img
+                        src="https://placehold.co/1000x1200/f4efe7/8f806d?text=GRITO+Eventos"
+                        alt="GRITO Eventos"
+                        loading="lazy"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FAQ
+             ===================================================== -->
+
+        <section class="faq section" id="faq">
+
+            <div class="container faq-grid">
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        PREGUNTAS FRECUENTES
+                    </span>
+
+                    <h2>
+                        Antes de <span>cotizar.</span>
+                    </h2>
+
+                    <p>
+                        Algunas respuestas a las preguntas que nuestros
+                        clientes pueden tener antes de comenzar.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-list">
+
+
+                    <details class="faq-item">
+
+                        <summary>
+                            ¿En qué zonas trabajan?
+                            <span>+</span>
+                        </summary>
+
+                        <div class="faq-answer">
+
+                            <p>
+                                Actualmente atendemos principalmente
+                                Guamúchil y sus alrededores.
+                            </p>
+
+                        </div>
+
+                    </details>
+
+
+                    <details class="faq-item">
+
+                        <summary>
+                            ¿Con cuánto tiempo debo reservar?
+                            <span>+</span>
+                        </summary>
+
+                        <div class="faq-answer">
+
+                            <p>
+                                Recomendamos solicitar tu cotización con
+                                anticipación, especialmente para bodas,
+                                XV años y fechas de alta demanda.
+                            </p>
+
+                        </div>
+
+                    </details>
+
+
+                    <details class="faq-item">
+
+                        <summary>
+                            ¿Puedo elegir solamente algunos productos?
+                            <span>+</span>
+                        </summary>
+
+                        <div class="faq-answer">
+
+                            <p>
+                                Sí. Puedes elegir uno de nuestros paquetes
+                                o armar tu evento de manera personalizada
+                                según lo que realmente necesitas.
+                            </p>
+
+                        </div>
+
+                    </details>
+
+
+                    <details class="faq-item">
+
+                        <summary>
+                            ¿Hacen entregas?
+                            <span>+</span>
+                        </summary>
+
+                        <div class="faq-answer">
+
+                            <p>
+                                Sí. Contamos con servicio de entrega.
+                                La disponibilidad y condiciones se
+                                confirman de acuerdo con la ubicación
+                                del evento.
+                            </p>
+
+                        </div>
+
+                    </details>
+
+
+                    <details class="faq-item">
+
+                        <summary>
+                            ¿Hacen montaje y desmontaje?
+                            <span>+</span>
+                        </summary>
+
+                        <div class="faq-answer">
+
+                            <p>
+                                Sí, sujeto a la cotización y a la ubicación
+                                del evento.
+                            </p>
+
+                        </div>
+
+                    </details>
+
+
+                    <details class="faq-item">
+
+                        <summary>
+                            ¿La decoración puede ser personalizada?
+                            <span>+</span>
+                        </summary>
+
+                        <div class="faq-answer">
+
+                            <p>
+                                Sí. Podemos trabajar diferentes ideas y
+                                detalles de acuerdo con el estilo de tu
+                                celebración.
+                            </p>
+
+                        </div>
+
+                    </details>
+
+
+                    <details class="faq-item">
+
+                        <summary>
+                            ¿Tienen aire acondicionado para eventos?
+                            <span>+</span>
+                        </summary>
+
+                        <div class="faq-answer">
+
+                            <p>
+                                Sí, contamos con opciones de climatización
+                                para eventos. La disponibilidad y capacidad
+                                se confirma según las características
+                                del espacio.
+                            </p>
+
+                        </div>
+
+                    </details>
+
+
+                    <details class="faq-item">
+
+                        <summary>
+                            ¿Tienen planta de luz?
+                            <span>+</span>
+                        </summary>
+
+                        <div class="faq-answer">
+
+                            <p>
+                                Planeamos ofrecer servicio de planta de luz
+                                para eventos. La disponibilidad debe
+                                confirmarse al solicitar la cotización.
+                            </p>
+
+                        </div>
+
+                    </details>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CTA FINAL
+             ===================================================== -->
+
+        <section class="final-cta" id="contacto">
+
+            <div class="container final-cta-content">
+
+                <span class="eyebrow">
+                    ¿LISTO PARA CELEBRAR?
+                </span>
+
+                <h2>
+                    Hagamos que tu evento
+                    <span>se sienta especial.</span>
+                </h2>
+
+                <p>
+                    Cuéntanos qué tienes en mente y prepara tu solicitud
+                    de cotización por WhatsApp.
+                </p>
+
+                <a
+                    href="#configurador"
+                    class="btn btn-primary btn-large"
+                >
+                    Solicitar cotización
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+         ========================================================= -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="#inicio"
+                    class="brand footer-logo"
+                >
+                    <span class="brand-name">
+                        GRITO
+                    </span>
+
+                    <span class="brand-subtitle">
+                        Eventos
+                    </span>
+                </a>
+
+                <p>
+                    Mobiliario · Decoración · Climatización
+                </p>
+
+                <p>
+                    Guamúchil, Sinaloa, México
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Navegación
+                </h4>
+
+                <a href="#inicio">
+                    Inicio
+                </a>
+
+                <a href="#servicios">
+                    Servicios
+                </a>
+
+                <a href="#paquetes">
+                    Paquetes
+                </a>
+
+                <a href="#nosotros">
+                    Nosotros
+                </a>
+
+                <a href="#faq">
+                    Preguntas frecuentes
+                </a>
+
+                <a href="#contacto">
+                    Contacto
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Contacto
+                </h4>
+
+                <a
+                    href="https://wa.me/526731340913"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    WhatsApp
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Síguenos
+                </h4>
+
+                <!--
+                    No se agregan URLs falsas.
+                    Estas variables/enlaces se configurarán después
+                    en script.js cuando existan las cuentas.
+                -->
+
+                <a
+                    href="#"
+                    class="social-link"
+                    data-social="instagram"
+                >
+                    Instagram
+                </a>
+
+                <a
+                    href="#"
+                    class="social-link"
+                    data-social="tiktok"
+                >
+                    TikTok
+                </a>
+
+                <a
+                    href="#"
+                    class="social-link"
+                    data-social="facebook"
+                >
+                    Facebook
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="container footer-bottom">
+
+            <p>
+                © 2026 GRITO Eventos. Todos los derechos reservados.
+            </p>
+
+            <p>
+                Guamúchil, Sinaloa, México
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================================
+         WHATSAPP FLOATING BUTTON
+         ========================================================= -->
+
+    <a
+        href="https://wa.me/526731340913"
+        class="whatsapp-float"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Escribir a GRITO Eventos por WhatsApp"
+    >
+        <span class="whatsapp-icon">
+            WA
+        </span>
+
+        <span class="whatsapp-label">
+            WhatsApp
+        </span>
+    </a>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+         ========================================================= -->
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
+```
