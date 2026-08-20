@@ -1,86 +1,72 @@
-/* =====================================================
+/* =========================================================
    GRITO EVENTOS
-   script.js
-   ===================================================== */
+   Main JavaScript
+========================================================= */
 
 
-/* =====================================================
+/* =========================================================
    BUSINESS CONFIGURATION
-   ===================================================== */
+========================================================= */
 
-const CONFIG = {
-    BUSINESS_NAME: "GRITO Eventos",
-    WHATSAPP_NUMBER: "526731340913",
-    CITY: "Guamúchil",
-    STATE: "Sinaloa",
-    COUNTRY: "México",
-
-    INSTAGRAM_URL: "",
-    TIKTOK_URL: "",
-    FACEBOOK_URL: ""
+const BUSINESS = {
+    name: "GRITO Eventos",
+    whatsapp: "526731340913",
+    city: "Guamúchil",
+    state: "Sinaloa",
+    country: "México"
 };
 
 
-/* =====================================================
-   CURRENT EVENT DATA
-   ===================================================== */
-
-const eventData = {
-    type: "",
-    people: "",
-    customPeople: "",
-    services: [],
-    date: "",
-    location: "",
-    colonia: "",
-    name: "",
-    whatsapp: "",
-    message: ""
-};
-
-
-/* =====================================================
+/* =========================================================
    DOM READY
-   ===================================================== */
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
     initEventChoices();
+
     initPeopleChoices();
+
+    initCustomPeople();
+
     initServiceChoices();
-    initFormFields();
-    initQuoteButton();
+
+    initDate();
+
+    initWhatsAppQuote();
 
     initInfoCards();
-    initModal();
 
     initSmoothScroll();
-
-    initSocialLinks();
 
 });
 
 
-/* =====================================================
-   EVENT TYPE
-   ===================================================== */
+
+/* =========================================================
+   01 · EVENT TYPE
+========================================================= */
 
 function initEventChoices() {
 
-    const buttons = document.querySelectorAll("[data-event]");
+    const eventButtons = document.querySelectorAll(
+        ".event-types .choice"
+    );
 
-    buttons.forEach(button => {
+    if (!eventButtons.length) {
+        return;
+    }
+
+
+    eventButtons.forEach(button => {
 
         button.addEventListener("click", () => {
 
-            buttons.forEach(item => {
+            eventButtons.forEach(item => {
                 item.classList.remove("selected");
             });
 
             button.classList.add("selected");
-
-            eventData.type =
-                button.dataset.event || "";
 
         });
 
@@ -89,30 +75,38 @@ function initEventChoices() {
 }
 
 
-/* =====================================================
-   NUMBER OF PEOPLE
-   ===================================================== */
+
+/* =========================================================
+   02 · PEOPLE
+========================================================= */
 
 function initPeopleChoices() {
 
-    const buttons =
-        document.querySelectorAll("[data-people]");
+    const peopleButtons = document.querySelectorAll(
+        ".people .choice"
+    );
 
-    const customInput =
-        document.querySelector("#customPeople");
+    if (!peopleButtons.length) {
+        return;
+    }
 
-    buttons.forEach(button => {
+
+    peopleButtons.forEach(button => {
 
         button.addEventListener("click", () => {
 
-            buttons.forEach(item => {
+            peopleButtons.forEach(item => {
                 item.classList.remove("selected");
             });
 
+
             button.classList.add("selected");
 
-            eventData.people =
-                button.dataset.people || "";
+
+            const customInput = document.getElementById(
+                "customPeople"
+            );
+
 
             if (customInput) {
                 customInput.value = "";
@@ -122,69 +116,75 @@ function initPeopleChoices() {
 
     });
 
+}
 
-    if (customInput) {
 
-        customInput.addEventListener("input", () => {
 
-            if (customInput.value.trim() !== "") {
+/* =========================================================
+   CUSTOM PEOPLE NUMBER
+========================================================= */
 
-                buttons.forEach(item => {
-                    item.classList.remove("selected");
-                });
+function initCustomPeople() {
 
-                eventData.people = "Personalizado";
+    const customInput = document.getElementById(
+        "customPeople"
+    );
 
-                eventData.customPeople =
-                    customInput.value.trim();
 
-            } else {
+    if (!customInput) {
+        return;
+    }
 
-                eventData.customPeople = "";
 
-            }
+    customInput.addEventListener("input", () => {
 
+        const peopleButtons = document.querySelectorAll(
+            ".people .choice"
+        );
+
+
+        peopleButtons.forEach(button => {
+            button.classList.remove("selected");
         });
 
-    }
+    });
 
 }
 
 
-/* =====================================================
-   SERVICES
-   ===================================================== */
+
+/* =========================================================
+   03 · SERVICES
+========================================================= */
 
 function initServiceChoices() {
 
-    const checkboxes =
-        document.querySelectorAll(
-            ".service-choice input"
+    const serviceChoices = document.querySelectorAll(
+        ".service-choice"
+    );
+
+
+    serviceChoices.forEach(choice => {
+
+        const checkbox = choice.querySelector(
+            'input[type="checkbox"]'
         );
 
 
-    checkboxes.forEach(checkbox => {
+        if (!checkbox) {
+            return;
+        }
+
 
         checkbox.addEventListener("change", () => {
 
-            const service =
-                checkbox.dataset.service ||
-                checkbox.value;
-
             if (checkbox.checked) {
 
-                if (!eventData.services.includes(service)) {
-
-                    eventData.services.push(service);
-
-                }
+                choice.classList.add("selected");
 
             } else {
 
-                eventData.services =
-                    eventData.services.filter(
-                        item => item !== service
-                    );
+                choice.classList.remove("selected");
 
             }
 
@@ -195,86 +195,142 @@ function initServiceChoices() {
 }
 
 
-/* =====================================================
-   FORM FIELDS
-   ===================================================== */
 
-function initFormFields() {
+/* =========================================================
+   04 · DATE
+========================================================= */
 
-    const fields = {
+function initDate() {
 
-        eventDate: "date",
-
-        eventLocation: "location",
-
-        eventColonia: "colonia",
-
-        clientName: "name",
-
-        clientWhatsapp: "whatsapp",
-
-        additionalMessage: "message"
-
-    };
-
-
-    Object.entries(fields).forEach(
-        ([elementId, dataKey]) => {
-
-            const element =
-                document.getElementById(elementId);
-
-            if (!element) return;
-
-
-            element.addEventListener(
-                "input",
-                () => {
-
-                    eventData[dataKey] =
-                        element.value.trim();
-
-                }
-            );
-
-        }
+    const dateInput = document.getElementById(
+        "eventDate"
     );
+
+
+    if (!dateInput) {
+        return;
+    }
+
+
+    /*
+        Prevent selecting dates in the past.
+    */
+
+    const today = new Date();
+
+
+    const year = today.getFullYear();
+
+    const month = String(
+        today.getMonth() + 1
+    ).padStart(2, "0");
+
+    const day = String(
+        today.getDate()
+    ).padStart(2, "0");
+
+
+    dateInput.min = `${year}-${month}-${day}`;
 
 }
 
 
-/* =====================================================
-   QUOTE BUTTON
-   ===================================================== */
 
-function initQuoteButton() {
+/* =========================================================
+   WHATSAPP QUOTE
+========================================================= */
 
-    const button =
-        document.getElementById(
-            "whatsappQuote"
-        );
+function initWhatsAppQuote() {
 
-    if (!button) return;
+    const whatsappButton = document.getElementById(
+        "whatsappQuote"
+    );
 
 
-    button.addEventListener("click", () => {
+    if (!whatsappButton) {
+        return;
+    }
 
-        if (!validateQuote()) {
+
+    whatsappButton.addEventListener("click", () => {
+
+        const eventType = getSelectedEvent();
+
+        const people = getSelectedPeople();
+
+        const services = getSelectedServices();
+
+        const date = getEventDate();
+
+
+        /*
+            Validation
+        */
+
+        if (!eventType) {
+
+            showQuoteError(
+                "Selecciona el tipo de evento."
+            );
+
             return;
+
         }
 
 
-        const message =
-            createWhatsAppMessage();
+        if (!people) {
+
+            showQuoteError(
+                "Selecciona el número de personas."
+            );
+
+            return;
+
+        }
 
 
-        const encodedMessage =
-            encodeURIComponent(message);
+        if (!services.length) {
+
+            showQuoteError(
+                "Selecciona al menos una opción de lo que necesitas."
+            );
+
+            return;
+
+        }
+
+
+        if (!date) {
+
+            showQuoteError(
+                "Selecciona la fecha de tu evento."
+            );
+
+            return;
+
+        }
+
+
+        /*
+            Everything is valid.
+            Create WhatsApp message.
+        */
+
+        const message = createWhatsAppMessage({
+            eventType,
+            people,
+            services,
+            date
+        });
 
 
         const whatsappURL =
-            `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            `https://wa.me/${BUSINESS.whatsapp}?text=${encodeURIComponent(message)}`;
 
+
+        /*
+            Open WhatsApp
+        */
 
         window.open(
             whatsappURL,
@@ -287,195 +343,197 @@ function initQuoteButton() {
 }
 
 
-/* =====================================================
-   VALIDATION
-   ===================================================== */
 
-function validateQuote() {
+/* =========================================================
+   GET EVENT
+========================================================= */
 
-    const errors = [];
+function getSelectedEvent() {
+
+    const selected = document.querySelector(
+        ".event-types .choice.selected"
+    );
 
 
-    if (!eventData.type) {
-        errors.push(
-            "Selecciona el tipo de evento."
-        );
+    if (!selected) {
+        return "";
     }
 
 
-    const numberOfPeople =
-        getPeopleValue();
-
-    if (!numberOfPeople) {
-        errors.push(
-            "Indica cuántas personas asistirán."
-        );
-    }
-
-
-    if (!eventData.date) {
-        errors.push(
-            "Selecciona la fecha del evento."
-        );
-    }
-
-
-    if (!eventData.location) {
-        errors.push(
-            "Indica dónde será tu evento."
-        );
-    }
-
-
-    if (!eventData.name) {
-        errors.push(
-            "Escribe tu nombre."
-        );
-    }
-
-
-    if (!eventData.whatsapp) {
-        errors.push(
-            "Escribe tu número de WhatsApp."
-        );
-    }
-
-
-    if (errors.length > 0) {
-
-        alert(
-            "Antes de continuar:\n\n" +
-            errors.map(
-                error => "• " + error
-            ).join("\n")
-        );
-
-        return false;
-
-    }
-
-
-    return true;
+    return selected.dataset.event || "";
 
 }
 
 
-/* =====================================================
-   PEOPLE VALUE
-   ===================================================== */
 
-function getPeopleValue() {
+/* =========================================================
+   GET PEOPLE
+========================================================= */
+
+function getSelectedPeople() {
+
+    const selected = document.querySelector(
+        ".people .choice.selected"
+    );
+
+
+    if (selected) {
+
+        return selected.dataset.people || "";
+
+    }
+
+
+    const customInput = document.getElementById(
+        "customPeople"
+    );
+
 
     if (
-        eventData.people ===
-        "Personalizado"
+        customInput &&
+        customInput.value.trim() !== ""
     ) {
 
-        return eventData.customPeople;
+        return customInput.value.trim();
 
     }
 
 
-    return eventData.people;
+    return "";
 
 }
 
 
-/* =====================================================
-   WHATSAPP MESSAGE
-   ===================================================== */
 
-function createWhatsAppMessage() {
+/* =========================================================
+   GET SERVICES
+========================================================= */
 
-    const people =
-        getPeopleValue();
+function getSelectedServices() {
 
-
-    const services =
-        eventData.services.length > 0
-
-            ? eventData.services
-                .map(service => `- ${service}`)
-                .join("\n")
-
-            : "- Me gustaría recibir recomendación sobre lo que necesito";
+    const checked = document.querySelectorAll(
+        '.service-choice input[type="checkbox"]:checked'
+    );
 
 
-    let location =
-        eventData.location;
+    return Array.from(checked).map(
+        checkbox => checkbox.value
+    );
+
+}
 
 
-    if (eventData.colonia) {
 
-        location +=
-            `, ${eventData.colonia}`;
+/* =========================================================
+   GET DATE
+========================================================= */
 
+function getEventDate() {
+
+    const dateInput = document.getElementById(
+        "eventDate"
+    );
+
+
+    if (!dateInput) {
+        return "";
     }
 
 
-    let message =
-
-`Hola ${CONFIG.BUSINESS_NAME} 👋
-
-Me gustaría solicitar una cotización para mi evento.
-
-Tipo de evento:
-${eventData.type}
-
-Número de personas:
-${people}
-
-Fecha:
-${formatDate(eventData.date)}
-
-Ubicación:
-${location}
-
-Estoy interesado en:
-${services}`;
-
-
-    if (eventData.message) {
-
-        message +=
-
-`
-
-Mensaje adicional:
-${eventData.message}`;
-
+    if (!dateInput.value) {
+        return "";
     }
 
 
-    if (eventData.name) {
+    return formatDateForMexico(
+        dateInput.value
+    );
 
-        message +=
+}
 
-`
 
-Mi nombre:
-${eventData.name}`;
 
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDateForMexico(dateString) {
+
+    const parts = dateString.split("-");
+
+
+    if (parts.length !== 3) {
+        return dateString;
     }
 
 
-    if (eventData.whatsapp) {
+    const year = parts[0];
 
-        message +=
+    const month = parts[1];
 
-`
+    const day = parts[2];
 
-Mi WhatsApp:
-${eventData.whatsapp}`;
 
-    }
+    return `${day}/${month}/${year}`;
+
+}
+
+
+
+/* =========================================================
+   CREATE WHATSAPP MESSAGE
+========================================================= */
+
+function createWhatsAppMessage({
+    eventType,
+    people,
+    services,
+    date
+}) {
+
+
+    let message = "";
+
+
+    message += `Hola ${BUSINESS.name} 👋\n\n`;
 
 
     message +=
+        `Me gustaría solicitar una cotización para mi evento.\n\n`;
 
-`
 
-¡Gracias!`;
+    message +=
+        `Tipo de evento:\n${eventType}\n\n`;
+
+
+    message +=
+        `Número de personas:\n${people}\n\n`;
+
+
+    message +=
+        `Fecha:\n${date}\n\n`;
+
+
+    message +=
+        `Estoy interesado en:\n`;
+
+
+    services.forEach(service => {
+
+        message += `- ${service}\n`;
+
+    });
+
+
+    message += `\n`;
+
+
+    message +=
+        `¿Me pueden compartir disponibilidad y cotización?\n\n`;
+
+
+    message +=
+        `¡Gracias!`;
 
 
     return message;
@@ -483,60 +541,128 @@ ${eventData.whatsapp}`;
 }
 
 
-/* =====================================================
-   DATE FORMAT
-   ===================================================== */
 
-function formatDate(dateString) {
+/* =========================================================
+   ERROR MESSAGE
+========================================================= */
 
-    if (!dateString) {
-        return "";
+function showQuoteError(message) {
+
+    /*
+        Remove existing error.
+    */
+
+    const existingError = document.querySelector(
+        ".quote-error"
+    );
+
+
+    if (existingError) {
+        existingError.remove();
     }
 
 
-    const date =
-        new Date(
-            `${dateString}T12:00:00`
+    /*
+        Create error message.
+    */
+
+    const error = document.createElement("div");
+
+
+    error.className = "quote-error";
+
+
+    error.textContent = message;
+
+
+    /*
+        Insert above WhatsApp button.
+    */
+
+    const button = document.getElementById(
+        "whatsappQuote"
+    );
+
+
+    if (button) {
+
+        button.parentNode.insertBefore(
+            error,
+            button
         );
 
-
-    if (Number.isNaN(date.getTime())) {
-        return dateString;
     }
 
 
-    return new Intl.DateTimeFormat(
-        "es-MX",
-        {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric"
+    /*
+        Automatically remove after 4 seconds.
+    */
+
+    setTimeout(() => {
+
+        if (error) {
+            error.remove();
         }
-    ).format(date);
+
+    }, 4000);
 
 }
 
 
-/* =====================================================
-   INFO CARDS
-   ===================================================== */
+
+/* =========================================================
+   INFORMATION CARDS
+========================================================= */
 
 function initInfoCards() {
 
-    const cards =
-        document.querySelectorAll(
-            "[data-info]"
-        );
+    const cards = document.querySelectorAll(
+        ".info-card"
+    );
+
+
+    if (!cards.length) {
+        return;
+    }
 
 
     cards.forEach(card => {
 
-        card.addEventListener("click", () => {
+        card.addEventListener("click", event => {
 
-            const info =
-                card.dataset.info;
+            /*
+                Don't trigger when clicking
+                a link inside the expanded content.
+            */
 
-            openInfoModal(info);
+            if (
+                event.target.closest("a")
+            ) {
+                return;
+            }
+
+
+            toggleInfoCard(card);
+
+        });
+
+
+        /*
+            Keyboard accessibility
+        */
+
+        card.addEventListener("keydown", event => {
+
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+
+                event.preventDefault();
+
+                toggleInfoCard(card);
+
+            }
 
         });
 
@@ -545,390 +671,146 @@ function initInfoCards() {
 }
 
 
-/* =====================================================
-   MODAL
-   ===================================================== */
 
-function initModal() {
+/* =========================================================
+   TOGGLE INFORMATION CARD
+========================================================= */
 
-    const modal =
-        document.getElementById(
-            "infoModal"
-        );
+function toggleInfoCard(card) {
 
-
-    if (!modal) return;
+    const details = card.querySelector(
+        ".info-details"
+    );
 
 
-    const closeButton =
-        modal.querySelector(
-            ".modal-close"
-        );
+    const toggle = card.querySelector(
+        ".info-toggle"
+    );
 
 
-    const overlay =
-        modal.querySelector(
-            ".modal-overlay"
-        );
-
-
-    if (closeButton) {
-
-        closeButton.addEventListener(
-            "click",
-            closeInfoModal
-        );
-
+    if (!details) {
+        return;
     }
 
 
-    if (overlay) {
-
-        overlay.addEventListener(
-            "click",
-            closeInfoModal
-        );
-
-    }
+    const isOpen =
+        card.classList.contains("open");
 
 
-    document.addEventListener(
-        "keydown",
-        event => {
+    /*
+        Close all other cards.
+        This keeps the page clean.
+    */
 
-            if (
-                event.key === "Escape"
-            ) {
+    document
+        .querySelectorAll(".info-card.open")
+        .forEach(openCard => {
 
-                closeInfoModal();
+            if (openCard !== card) {
+
+                openCard.classList.remove(
+                    "open"
+                );
+
+
+                const otherToggle =
+                    openCard.querySelector(
+                        ".info-toggle"
+                    );
+
+
+                if (otherToggle) {
+                    otherToggle.textContent = "+";
+                }
 
             }
 
+        });
+
+
+    /*
+        Toggle current card.
+    */
+
+    if (isOpen) {
+
+        card.classList.remove("open");
+
+
+        if (toggle) {
+            toggle.textContent = "+";
         }
-    );
+
+
+    } else {
+
+        card.classList.add("open");
+
+
+        if (toggle) {
+            toggle.textContent = "−";
+        }
+
+    }
 
 }
 
 
-/* =====================================================
-   INFO MODAL CONTENT
-   ===================================================== */
 
-const infoContent = {
-
-    mobiliario: {
-
-        number: "01",
-
-        title: "Mobiliario",
-
-        text:
-            "Todo lo necesario para que tus invitados estén cómodos y tu evento luzca bien organizado.",
-
-        items: [
-            "Sillas para eventos",
-            "Mesas",
-            "Mesas tipo cóctel",
-            "Mesas para buffet",
-            "Mantelería",
-            "Decoración para sillas"
-        ]
-
-    },
-
-
-    decoracion: {
-
-        number: "02",
-
-        title: "Decoración",
-
-        text:
-            "Diseñamos y elaboramos parte de nuestra decoración pensando en el estilo y ocasión de cada evento.",
-
-        items: [
-            "Centros de mesa",
-            "Arcos decorativos",
-            "Fondos para fotos",
-            "Decoración floral",
-            "Velas LED e iluminación",
-            "Decoración personalizada"
-        ]
-
-    },
-
-
-    climatizacion: {
-
-        number: "03",
-
-        title: "Climatización",
-
-        text:
-            "Para eventos donde el clima es un factor importante, contamos con opciones de climatización portátil.",
-
-        items: [
-            "Aire acondicionado portátil",
-            "Opciones según el espacio",
-            "Disponibilidad por evento",
-            "Confirmación previa de capacidad"
-        ]
-
-    },
-
-
-    logistica: {
-
-        number: "04",
-
-        title: "Entrega y montaje",
-
-        text:
-            "Nos encargamos de la parte logística para que tú puedas concentrarte en disfrutar tu celebración.",
-
-        items: [
-            "Entrega",
-            "Montaje",
-            "Desmontaje",
-            "Recolección",
-            "Coordinación según ubicación"
-        ]
-
-    }
-
-};
-
-
-/* =====================================================
-   OPEN MODAL
-   ===================================================== */
-
-function openInfoModal(type) {
-
-    const data =
-        infoContent[type];
-
-    if (!data) return;
-
-
-    const modal =
-        document.getElementById(
-            "infoModal"
-        );
-
-
-    if (!modal) return;
-
-
-    const number =
-        modal.querySelector(
-            ".modal-number"
-        );
-
-
-    const title =
-        modal.querySelector(
-            ".modal-title"
-        );
-
-
-    const text =
-        modal.querySelector(
-            ".modal-text"
-        );
-
-
-    const list =
-        modal.querySelector(
-            ".modal-list"
-        );
-
-
-    if (number) {
-        number.textContent =
-            data.number;
-    }
-
-
-    if (title) {
-        title.textContent =
-            data.title;
-    }
-
-
-    if (text) {
-        text.textContent =
-            data.text;
-    }
-
-
-    if (list) {
-
-        list.innerHTML =
-            data.items
-                .map(
-                    item =>
-                        `<li>${item}</li>`
-                )
-                .join("");
-
-    }
-
-
-    modal.classList.add("active");
-
-    document.body.style.overflow =
-        "hidden";
-
-}
-
-
-/* =====================================================
-   CLOSE MODAL
-   ===================================================== */
-
-function closeInfoModal() {
-
-    const modal =
-        document.getElementById(
-            "infoModal"
-        );
-
-
-    if (!modal) return;
-
-
-    modal.classList.remove(
-        "active"
-    );
-
-
-    document.body.style.overflow =
-        "";
-
-}
-
-
-/* =====================================================
+/* =========================================================
    SMOOTH SCROLL
-   ===================================================== */
+========================================================= */
 
 function initSmoothScroll() {
 
-    document.querySelectorAll(
+    const links = document.querySelectorAll(
         'a[href^="#"]'
-    ).forEach(link => {
-
-        link.addEventListener(
-            "click",
-            event => {
-
-                const targetId =
-                    link.getAttribute(
-                        "href"
-                    );
+    );
 
 
-                if (
-                    !targetId ||
-                    targetId === "#"
-                ) {
-                    return;
-                }
+    links.forEach(link => {
+
+        link.addEventListener("click", event => {
+
+            const targetID =
+                link.getAttribute("href");
 
 
-                const target =
-                    document.querySelector(
-                        targetId
-                    );
-
-
-                if (!target) return;
-
-
-                event.preventDefault();
-
-
-                target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
+            if (
+                !targetID ||
+                targetID === "#"
+            ) {
+                return;
             }
-        );
+
+
+            const target =
+                document.querySelector(
+                    targetID
+                );
+
+
+            if (!target) {
+                return;
+            }
+
+
+            event.preventDefault();
+
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        });
 
     });
 
 }
 
 
-/* =====================================================
-   SOCIAL MEDIA
-   ===================================================== */
 
-function initSocialLinks() {
-
-    const socialLinks = {
-
-        instagram:
-            CONFIG.INSTAGRAM_URL,
-
-        tiktok:
-            CONFIG.TIKTOK_URL,
-
-        facebook:
-            CONFIG.FACEBOOK_URL
-
-    };
-
-
-    Object.entries(
-        socialLinks
-    ).forEach(
-        ([platform, url]) => {
-
-            const links =
-                document.querySelectorAll(
-                    `[data-social="${platform}"]`
-                );
-
-
-            links.forEach(link => {
-
-                if (url) {
-
-                    link.href = url;
-
-                    link.target = "_blank";
-
-                    link.rel =
-                        "noopener noreferrer";
-
-                } else {
-
-                    link.style.display =
-                        "none";
-
-                }
-
-            });
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   GLOBAL CONFIG
-   ===================================================== */
-
-window.GRITO = {
-
-    CONFIG,
-
-    eventData,
-
-    createWhatsAppMessage
-
-};
+/* =========================================================
+   END
+========================================================= */
