@@ -1,79 +1,86 @@
-/* =========================================================
+/* =====================================================
    GRITO EVENTOS
-   Main JavaScript
-   ========================================================= */
+   script.js
+   ===================================================== */
 
 
-/* =========================================================
-   1. BUSINESS CONFIGURATION
-   ========================================================= */
+/* =====================================================
+   BUSINESS CONFIGURATION
+   ===================================================== */
 
-const BUSINESS_CONFIG = {
-    name: "GRITO Eventos",
-    whatsapp: "526731340913",
-    city: "Guamúchil",
-    state: "Sinaloa",
-    country: "México",
+const CONFIG = {
+    BUSINESS_NAME: "GRITO Eventos",
+    WHATSAPP_NUMBER: "526731340913",
+    CITY: "Guamúchil",
+    STATE: "Sinaloa",
+    COUNTRY: "México",
 
-    social: {
-        instagram: "INSTAGRAM_URL",
-        tiktok: "TIKTOK_URL",
-        facebook: "FACEBOOK_URL"
-    }
+    INSTAGRAM_URL: "",
+    TIKTOK_URL: "",
+    FACEBOOK_URL: ""
 };
 
 
-/* =========================================================
-   2. DOM READY
-   ========================================================= */
+/* =====================================================
+   CURRENT EVENT DATA
+   ===================================================== */
+
+const eventData = {
+    type: "",
+    people: "",
+    customPeople: "",
+    services: [],
+    date: "",
+    location: "",
+    colonia: "",
+    name: "",
+    whatsapp: "",
+    message: ""
+};
+
+
+/* =====================================================
+   DOM READY
+   ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    initMobileNavigation();
-    initConfigurator();
-    initFAQ();
+    initEventChoices();
+    initPeopleChoices();
+    initServiceChoices();
+    initFormFields();
+    initQuoteButton();
+
+    initInfoCards();
+    initModal();
+
     initSmoothScroll();
-    initWhatsAppLinks();
-    initCurrentYear();
+
+    initSocialLinks();
 
 });
 
 
-/* =========================================================
-   3. MOBILE NAVIGATION
-   ========================================================= */
+/* =====================================================
+   EVENT TYPE
+   ===================================================== */
 
-function initMobileNavigation() {
+function initEventChoices() {
 
-    const toggle = document.querySelector(".mobile-menu-toggle");
-    const navigation = document.querySelector(".main-navigation");
+    const buttons = document.querySelectorAll("[data-event]");
 
-    if (!toggle || !navigation) {
-        return;
-    }
+    buttons.forEach(button => {
 
-    toggle.addEventListener("click", () => {
+        button.addEventListener("click", () => {
 
-        navigation.classList.toggle("open");
+            buttons.forEach(item => {
+                item.classList.remove("selected");
+            });
 
-        const isOpen = navigation.classList.contains("open");
+            button.classList.add("selected");
 
-        toggle.setAttribute("aria-expanded", isOpen);
-
-    });
-
-
-    /* Close menu after clicking a navigation link */
-
-    const navLinks = navigation.querySelectorAll("a");
-
-    navLinks.forEach(link => {
-
-        link.addEventListener("click", () => {
-
-            navigation.classList.remove("open");
-
-            toggle.setAttribute("aria-expanded", "false");
+            eventData.type =
+                button.dataset.event || "";
 
         });
 
@@ -82,235 +89,33 @@ function initMobileNavigation() {
 }
 
 
-/* =========================================================
-   4. CONFIGURATOR
-   ========================================================= */
+/* =====================================================
+   NUMBER OF PEOPLE
+   ===================================================== */
 
-function initConfigurator() {
+function initPeopleChoices() {
 
-    const configurator = document.querySelector("#event-configurator");
+    const buttons =
+        document.querySelectorAll("[data-people]");
 
-    if (!configurator) {
-        return;
-    }
+    const customInput =
+        document.querySelector("#customPeople");
 
-
-    /* -----------------------------------------------------
-       Elements
-       ----------------------------------------------------- */
-
-    const steps = configurator.querySelectorAll(".config-step");
-
-    const progressSteps =
-        configurator.querySelectorAll(".progress-step");
-
-    const nextButtons =
-        configurator.querySelectorAll("[data-next]");
-
-    const previousButtons =
-        configurator.querySelectorAll("[data-prev]");
-
-
-    let currentStep = 0;
-
-
-    /* -----------------------------------------------------
-       Customer data
-       ----------------------------------------------------- */
-
-    const eventData = {
-
-        eventType: "",
-
-        guests: "",
-
-        customGuests: "",
-
-        needs: [],
-
-        date: "",
-
-        location: "",
-
-        neighborhood: "",
-
-        name: "",
-
-        whatsapp: "",
-
-        message: ""
-
-    };
-
-
-    /* -----------------------------------------------------
-       Show step
-       ----------------------------------------------------- */
-
-    function showStep(index) {
-
-        if (index < 0 || index >= steps.length) {
-            return;
-        }
-
-        currentStep = index;
-
-
-        steps.forEach((step, stepIndex) => {
-
-            step.classList.toggle(
-                "active",
-                stepIndex === currentStep
-            );
-
-        });
-
-
-        progressSteps.forEach(
-            (progressStep, progressIndex) => {
-
-                progressStep.classList.toggle(
-                    "active",
-                    progressIndex === currentStep
-                );
-
-                progressStep.classList.toggle(
-                    "completed",
-                    progressIndex < currentStep
-                );
-
-            }
-        );
-
-
-        /* Scroll configurator to top on mobile */
-
-        const rect =
-            configurator.getBoundingClientRect();
-
-        if (
-            rect.top < 0 ||
-            rect.top > window.innerHeight
-        ) {
-
-            configurator.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        }
-
-    }
-
-
-    /* -----------------------------------------------------
-       Next buttons
-       ----------------------------------------------------- */
-
-    nextButtons.forEach(button => {
+    buttons.forEach(button => {
 
         button.addEventListener("click", () => {
 
-            const targetStep =
-                parseInt(
-                    button.dataset.next,
-                    10
-                );
-
-            if (!validateStep(currentStep)) {
-                return;
-            }
-
-            collectCurrentStepData();
-
-            showStep(targetStep);
-
-        });
-
-    });
-
-
-    /* -----------------------------------------------------
-       Previous buttons
-       ----------------------------------------------------- */
-
-    previousButtons.forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            const targetStep =
-                parseInt(
-                    button.dataset.prev,
-                    10
-                );
-
-            showStep(targetStep);
-
-        });
-
-    });
-
-
-    /* -----------------------------------------------------
-       Event type
-       ----------------------------------------------------- */
-
-    const eventOptions =
-        configurator.querySelectorAll(
-            "[data-event-type]"
-        );
-
-    eventOptions.forEach(option => {
-
-        option.addEventListener("click", () => {
-
-            eventOptions.forEach(item => {
+            buttons.forEach(item => {
                 item.classList.remove("selected");
             });
 
-            option.classList.add("selected");
+            button.classList.add("selected");
 
-            eventData.eventType =
-                option.dataset.eventType;
-
-        });
-
-    });
-
-
-    /* -----------------------------------------------------
-       Guest count
-       ----------------------------------------------------- */
-
-    const guestOptions =
-        configurator.querySelectorAll(
-            "[data-guests]"
-        );
-
-    guestOptions.forEach(option => {
-
-        option.addEventListener("click", () => {
-
-            guestOptions.forEach(item => {
-                item.classList.remove("selected");
-            });
-
-            option.classList.add("selected");
-
-            eventData.guests =
-                option.dataset.guests;
-
-            const customInput =
-                document.querySelector(
-                    "#custom-guests"
-                );
+            eventData.people =
+                button.dataset.people || "";
 
             if (customInput) {
-
                 customInput.value = "";
-
-                eventData.customGuests = "";
-
             }
 
         });
@@ -318,151 +123,116 @@ function initConfigurator() {
     });
 
 
-    /* -----------------------------------------------------
-       Custom guest number
-       ----------------------------------------------------- */
+    if (customInput) {
 
-    const customGuests =
-        document.querySelector("#custom-guests");
+        customInput.addEventListener("input", () => {
 
-    if (customGuests) {
+            if (customInput.value.trim() !== "") {
 
-        customGuests.addEventListener(
-            "input",
-            () => {
+                buttons.forEach(item => {
+                    item.classList.remove("selected");
+                });
 
-                const value =
-                    customGuests.value.trim();
+                eventData.people = "Personalizado";
 
-                if (value !== "") {
+                eventData.customPeople =
+                    customInput.value.trim();
 
-                    guestOptions.forEach(option => {
-                        option.classList.remove(
-                            "selected"
-                        );
-                    });
+            } else {
 
-                    eventData.guests = "Personalizado";
-
-                    eventData.customGuests = value;
-
-                }
+                eventData.customPeople = "";
 
             }
-        );
+
+        });
 
     }
 
+}
 
-    /* -----------------------------------------------------
-       Needs / products
-       ----------------------------------------------------- */
 
-    const needCheckboxes =
-        configurator.querySelectorAll(
-            'input[name="event-needs"]'
+/* =====================================================
+   SERVICES
+   ===================================================== */
+
+function initServiceChoices() {
+
+    const checkboxes =
+        document.querySelectorAll(
+            ".service-choice input"
         );
 
-    needCheckboxes.forEach(checkbox => {
+
+    checkboxes.forEach(checkbox => {
 
         checkbox.addEventListener("change", () => {
 
-            eventData.needs =
-                Array.from(needCheckboxes)
+            const service =
+                checkbox.dataset.service ||
+                checkbox.value;
 
-                    .filter(item => item.checked)
+            if (checkbox.checked) {
 
-                    .map(item => item.value);
+                if (!eventData.services.includes(service)) {
+
+                    eventData.services.push(service);
+
+                }
+
+            } else {
+
+                eventData.services =
+                    eventData.services.filter(
+                        item => item !== service
+                    );
+
+            }
 
         });
 
     });
 
-
-    /* -----------------------------------------------------
-       Final WhatsApp button
-       ----------------------------------------------------- */
-
-    const whatsappButton =
-        configurator.querySelector(
-            "#configurator-whatsapp"
-        );
-
-    if (whatsappButton) {
-
-        whatsappButton.addEventListener(
-            "click",
-            () => {
-
-                collectCurrentStepData();
-
-                if (!validateStep(currentStep)) {
-                    return;
-                }
-
-                const message =
-                    createWhatsAppMessage(
-                        eventData
-                    );
-
-                openWhatsApp(message);
-
-            }
-        );
-
-    }
+}
 
 
-    /* -----------------------------------------------------
-       Form fields
-       ----------------------------------------------------- */
+/* =====================================================
+   FORM FIELDS
+   ===================================================== */
 
-    const formFields = {
+function initFormFields() {
 
-        date:
-            document.querySelector("#event-date"),
+    const fields = {
 
-        location:
-            document.querySelector("#event-location"),
+        eventDate: "date",
 
-        neighborhood:
-            document.querySelector(
-                "#event-neighborhood"
-            ),
+        eventLocation: "location",
 
-        name:
-            document.querySelector("#customer-name"),
+        eventColonia: "colonia",
 
-        whatsapp:
-            document.querySelector(
-                "#customer-whatsapp"
-            ),
+        clientName: "name",
 
-        message:
-            document.querySelector(
-                "#customer-message"
-            )
+        clientWhatsapp: "whatsapp",
+
+        additionalMessage: "message"
 
     };
 
 
-    Object.entries(formFields).forEach(
-        ([key, field]) => {
+    Object.entries(fields).forEach(
+        ([elementId, dataKey]) => {
 
-            if (!field) {
-                return;
-            }
+            const element =
+                document.getElementById(elementId);
 
-            field.addEventListener(
+            if (!element) return;
+
+
+            element.addEventListener(
                 "input",
                 () => {
 
-                    eventData[key] =
-                        field.value.trim();
-
-                    field.classList.remove(
-                        "field-error"
-                    );
+                    eventData[dataKey] =
+                        element.value.trim();
 
                 }
             );
@@ -470,445 +240,257 @@ function initConfigurator() {
         }
     );
 
+}
 
-    /* -----------------------------------------------------
-       Initial state
-       ----------------------------------------------------- */
 
-    showStep(0);
+/* =====================================================
+   QUOTE BUTTON
+   ===================================================== */
 
+function initQuoteButton() {
 
-    /* -----------------------------------------------------
-       Validation
-       ----------------------------------------------------- */
+    const button =
+        document.getElementById(
+            "whatsappQuote"
+        );
 
-    function validateStep(stepIndex) {
+    if (!button) return;
 
-        clearValidationMessages();
 
+    button.addEventListener("click", () => {
 
-        /* STEP 1 — EVENT TYPE */
-
-        if (stepIndex === 0) {
-
-            if (!eventData.eventType) {
-
-                showValidation(
-                    "Selecciona el tipo de evento."
-                );
-
-                return false;
-
-            }
-
-        }
-
-
-        /* STEP 2 — GUESTS */
-
-        if (stepIndex === 1) {
-
-            if (
-                !eventData.guests &&
-                !eventData.customGuests
-            ) {
-
-                showValidation(
-                    "Indica aproximadamente cuántas personas asistirán."
-                );
-
-                return false;
-
-            }
-
-            if (
-                eventData.guests === "Personalizado" &&
-                !eventData.customGuests
-            ) {
-
-                showValidation(
-                    "Indica el número de personas."
-                );
-
-                return false;
-
-            }
-
-        }
-
-
-        /* STEP 3 — NEEDS */
-
-        if (stepIndex === 2) {
-
-            if (eventData.needs.length === 0) {
-
-                showValidation(
-                    "Selecciona al menos un servicio o producto."
-                );
-
-                return false;
-
-            }
-
-        }
-
-
-        /* STEP 4 — DATE / LOCATION */
-
-        if (stepIndex === 3) {
-
-            const date =
-                document.querySelector(
-                    "#event-date"
-                );
-
-            const location =
-                document.querySelector(
-                    "#event-location"
-                );
-
-
-            if (
-                !date ||
-                !date.value
-            ) {
-
-                markError(date);
-
-                showValidation(
-                    "Selecciona la fecha de tu evento."
-                );
-
-                return false;
-
-            }
-
-
-            if (
-                !location ||
-                !location.value.trim()
-            ) {
-
-                markError(location);
-
-                showValidation(
-                    "Indica dónde será tu evento."
-                );
-
-                return false;
-
-            }
-
-        }
-
-
-        /* STEP 5 — CONTACT */
-
-        if (stepIndex === 4) {
-
-            const name =
-                document.querySelector(
-                    "#customer-name"
-                );
-
-            const whatsapp =
-                document.querySelector(
-                    "#customer-whatsapp"
-                );
-
-
-            if (
-                !name ||
-                !name.value.trim()
-            ) {
-
-                markError(name);
-
-                showValidation(
-                    "Indica tu nombre."
-                );
-
-                return false;
-
-            }
-
-
-            if (
-                !whatsapp ||
-                !whatsapp.value.trim()
-            ) {
-
-                markError(whatsapp);
-
-                showValidation(
-                    "Indica tu número de WhatsApp."
-                );
-
-                return false;
-
-            }
-
-
-            const cleanPhone =
-                whatsapp.value.replace(
-                    /[^0-9+]/g,
-                    ""
-                );
-
-
-            if (cleanPhone.length < 8) {
-
-                markError(whatsapp);
-
-                showValidation(
-                    "Verifica tu número de WhatsApp."
-                );
-
-                return false;
-
-            }
-
-        }
-
-
-        return true;
-
-    }
-
-
-    /* -----------------------------------------------------
-       Collect data
-       ----------------------------------------------------- */
-
-    function collectCurrentStepData() {
-
-        const date =
-            document.querySelector(
-                "#event-date"
-            );
-
-        const location =
-            document.querySelector(
-                "#event-location"
-            );
-
-        const neighborhood =
-            document.querySelector(
-                "#event-neighborhood"
-            );
-
-        const name =
-            document.querySelector(
-                "#customer-name"
-            );
-
-        const whatsapp =
-            document.querySelector(
-                "#customer-whatsapp"
-            );
-
-        const message =
-            document.querySelector(
-                "#customer-message"
-            );
-
-
-        if (date) {
-            eventData.date =
-                date.value.trim();
-        }
-
-        if (location) {
-            eventData.location =
-                location.value.trim();
-        }
-
-        if (neighborhood) {
-            eventData.neighborhood =
-                neighborhood.value.trim();
-        }
-
-        if (name) {
-            eventData.name =
-                name.value.trim();
-        }
-
-        if (whatsapp) {
-            eventData.whatsapp =
-                whatsapp.value.trim();
-        }
-
-        if (message) {
-            eventData.message =
-                message.value.trim();
-        }
-
-    }
-
-
-    /* -----------------------------------------------------
-       Validation message
-       ----------------------------------------------------- */
-
-    function showValidation(message) {
-
-        let validation =
-            configurator.querySelector(
-                ".validation-message"
-            );
-
-
-        if (!validation) {
-
-            validation =
-                document.createElement("div");
-
-            validation.className =
-                "validation-message";
-
-            const activeStep =
-                steps[currentStep];
-
-            const actions =
-                activeStep.querySelector(
-                    ".step-actions"
-                );
-
-            if (actions) {
-
-                activeStep.insertBefore(
-                    validation,
-                    actions
-                );
-
-            } else {
-
-                activeStep.appendChild(
-                    validation
-                );
-
-            }
-
-        }
-
-
-        validation.textContent = message;
-
-        validation.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest"
-        });
-
-    }
-
-
-    function clearValidationMessages() {
-
-        configurator
-            .querySelectorAll(
-                ".validation-message"
-            )
-            .forEach(element => {
-
-                element.remove();
-
-            });
-
-    }
-
-
-    function markError(element) {
-
-        if (!element) {
+        if (!validateQuote()) {
             return;
         }
 
-        element.classList.add(
-            "field-error"
+
+        const message =
+            createWhatsAppMessage();
+
+
+        const encodedMessage =
+            encodeURIComponent(message);
+
+
+        const whatsappURL =
+            `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
+
+        window.open(
+            whatsappURL,
+            "_blank",
+            "noopener,noreferrer"
         );
 
-        element.focus();
-
-    }
+    });
 
 }
 
 
-/* =========================================================
-   5. WHATSAPP MESSAGE
-   ========================================================= */
+/* =====================================================
+   VALIDATION
+   ===================================================== */
 
-function createWhatsAppMessage(data) {
+function validateQuote() {
 
-    const guests =
-        data.customGuests
-            ? data.customGuests
-            : data.guests;
+    const errors = [];
 
 
-    const needsText =
-        data.needs.length > 0
+    if (!eventData.type) {
+        errors.push(
+            "Selecciona el tipo de evento."
+        );
+    }
 
-            ? data.needs
-                .map(item => `- ${item}`)
+
+    const numberOfPeople =
+        getPeopleValue();
+
+    if (!numberOfPeople) {
+        errors.push(
+            "Indica cuántas personas asistirán."
+        );
+    }
+
+
+    if (!eventData.date) {
+        errors.push(
+            "Selecciona la fecha del evento."
+        );
+    }
+
+
+    if (!eventData.location) {
+        errors.push(
+            "Indica dónde será tu evento."
+        );
+    }
+
+
+    if (!eventData.name) {
+        errors.push(
+            "Escribe tu nombre."
+        );
+    }
+
+
+    if (!eventData.whatsapp) {
+        errors.push(
+            "Escribe tu número de WhatsApp."
+        );
+    }
+
+
+    if (errors.length > 0) {
+
+        alert(
+            "Antes de continuar:\n\n" +
+            errors.map(
+                error => "• " + error
+            ).join("\n")
+        );
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   PEOPLE VALUE
+   ===================================================== */
+
+function getPeopleValue() {
+
+    if (
+        eventData.people ===
+        "Personalizado"
+    ) {
+
+        return eventData.customPeople;
+
+    }
+
+
+    return eventData.people;
+
+}
+
+
+/* =====================================================
+   WHATSAPP MESSAGE
+   ===================================================== */
+
+function createWhatsAppMessage() {
+
+    const people =
+        getPeopleValue();
+
+
+    const services =
+        eventData.services.length > 0
+
+            ? eventData.services
+                .map(service => `- ${service}`)
                 .join("\n")
 
-            : "- Por definir";
+            : "- Me gustaría recibir recomendación sobre lo que necesito";
 
 
-    const neighborhoodText =
-        data.neighborhood
-            ? `\nColonia / comunidad: ${data.neighborhood}`
-            : "";
+    let location =
+        eventData.location;
 
 
-    const additionalMessage =
-        data.message
-            ? data.message
-            : "Sin mensaje adicional.";
+    if (eventData.colonia) {
+
+        location +=
+            `, ${eventData.colonia}`;
+
+    }
 
 
-    return `Hola GRITO Eventos 👋
+    let message =
+
+`Hola ${CONFIG.BUSINESS_NAME} 👋
 
 Me gustaría solicitar una cotización para mi evento.
 
 Tipo de evento:
-${data.eventType}
+${eventData.type}
 
 Número de personas:
-${guests}
+${people}
 
 Fecha:
-${formatDate(data.date)}
+${formatDate(eventData.date)}
 
 Ubicación:
-${data.location}${neighborhoodText}
+${location}
 
-Estoy interesado(a) en:
-${needsText}
+Estoy interesado en:
+${services}`;
 
-Nombre:
-${data.name}
 
-Mi WhatsApp:
-${data.whatsapp}
+    if (eventData.message) {
+
+        message +=
+
+`
 
 Mensaje adicional:
-${additionalMessage}
+${eventData.message}`;
+
+    }
+
+
+    if (eventData.name) {
+
+        message +=
+
+`
+
+Mi nombre:
+${eventData.name}`;
+
+    }
+
+
+    if (eventData.whatsapp) {
+
+        message +=
+
+`
+
+Mi WhatsApp:
+${eventData.whatsapp}`;
+
+    }
+
+
+    message +=
+
+`
 
 ¡Gracias!`;
+
+
+    return message;
+
 }
 
 
-/* =========================================================
-   6. FORMAT DATE
-   ========================================================= */
+/* =====================================================
+   DATE FORMAT
+   ===================================================== */
 
 function formatDate(dateString) {
 
     if (!dateString) {
-        return "Por definir";
+        return "";
     }
 
 
@@ -935,129 +517,316 @@ function formatDate(dateString) {
 }
 
 
-/* =========================================================
-   7. OPEN WHATSAPP
-   ========================================================= */
+/* =====================================================
+   INFO CARDS
+   ===================================================== */
 
-function openWhatsApp(message) {
+function initInfoCards() {
 
-    const encodedMessage =
-        encodeURIComponent(message);
-
-
-    const whatsappURL =
-        `https://wa.me/${BUSINESS_CONFIG.whatsapp}?text=${encodedMessage}`;
+    const cards =
+        document.querySelectorAll(
+            "[data-info]"
+        );
 
 
-    window.open(
-        whatsappURL,
-        "_blank",
-        "noopener,noreferrer"
+    cards.forEach(card => {
+
+        card.addEventListener("click", () => {
+
+            const info =
+                card.dataset.info;
+
+            openInfoModal(info);
+
+        });
+
+    });
+
+}
+
+
+/* =====================================================
+   MODAL
+   ===================================================== */
+
+function initModal() {
+
+    const modal =
+        document.getElementById(
+            "infoModal"
+        );
+
+
+    if (!modal) return;
+
+
+    const closeButton =
+        modal.querySelector(
+            ".modal-close"
+        );
+
+
+    const overlay =
+        modal.querySelector(
+            ".modal-overlay"
+        );
+
+
+    if (closeButton) {
+
+        closeButton.addEventListener(
+            "click",
+            closeInfoModal
+        );
+
+    }
+
+
+    if (overlay) {
+
+        overlay.addEventListener(
+            "click",
+            closeInfoModal
+        );
+
+    }
+
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeInfoModal();
+
+            }
+
+        }
     );
 
 }
 
 
-/* =========================================================
-   8. GENERAL WHATSAPP LINKS
-   ========================================================= */
+/* =====================================================
+   INFO MODAL CONTENT
+   ===================================================== */
 
-function initWhatsAppLinks() {
+const infoContent = {
 
-    const links =
-        document.querySelectorAll(
-            "[data-whatsapp]"
+    mobiliario: {
+
+        number: "01",
+
+        title: "Mobiliario",
+
+        text:
+            "Todo lo necesario para que tus invitados estén cómodos y tu evento luzca bien organizado.",
+
+        items: [
+            "Sillas para eventos",
+            "Mesas",
+            "Mesas tipo cóctel",
+            "Mesas para buffet",
+            "Mantelería",
+            "Decoración para sillas"
+        ]
+
+    },
+
+
+    decoracion: {
+
+        number: "02",
+
+        title: "Decoración",
+
+        text:
+            "Diseñamos y elaboramos parte de nuestra decoración pensando en el estilo y ocasión de cada evento.",
+
+        items: [
+            "Centros de mesa",
+            "Arcos decorativos",
+            "Fondos para fotos",
+            "Decoración floral",
+            "Velas LED e iluminación",
+            "Decoración personalizada"
+        ]
+
+    },
+
+
+    climatizacion: {
+
+        number: "03",
+
+        title: "Climatización",
+
+        text:
+            "Para eventos donde el clima es un factor importante, contamos con opciones de climatización portátil.",
+
+        items: [
+            "Aire acondicionado portátil",
+            "Opciones según el espacio",
+            "Disponibilidad por evento",
+            "Confirmación previa de capacidad"
+        ]
+
+    },
+
+
+    logistica: {
+
+        number: "04",
+
+        title: "Entrega y montaje",
+
+        text:
+            "Nos encargamos de la parte logística para que tú puedas concentrarte en disfrutar tu celebración.",
+
+        items: [
+            "Entrega",
+            "Montaje",
+            "Desmontaje",
+            "Recolección",
+            "Coordinación según ubicación"
+        ]
+
+    }
+
+};
+
+
+/* =====================================================
+   OPEN MODAL
+   ===================================================== */
+
+function openInfoModal(type) {
+
+    const data =
+        infoContent[type];
+
+    if (!data) return;
+
+
+    const modal =
+        document.getElementById(
+            "infoModal"
         );
 
 
-    links.forEach(link => {
+    if (!modal) return;
 
-        link.addEventListener(
-            "click",
-            event => {
 
-                event.preventDefault();
-
-                const customMessage =
-                    link.dataset.whatsappMessage ||
-                    "Hola GRITO Eventos 👋 Me gustaría solicitar una cotización para mi evento.";
-
-                openWhatsApp(
-                    customMessage
-                );
-
-            }
+    const number =
+        modal.querySelector(
+            ".modal-number"
         );
 
-    });
+
+    const title =
+        modal.querySelector(
+            ".modal-title"
+        );
+
+
+    const text =
+        modal.querySelector(
+            ".modal-text"
+        );
+
+
+    const list =
+        modal.querySelector(
+            ".modal-list"
+        );
+
+
+    if (number) {
+        number.textContent =
+            data.number;
+    }
+
+
+    if (title) {
+        title.textContent =
+            data.title;
+    }
+
+
+    if (text) {
+        text.textContent =
+            data.text;
+    }
+
+
+    if (list) {
+
+        list.innerHTML =
+            data.items
+                .map(
+                    item =>
+                        `<li>${item}</li>`
+                )
+                .join("");
+
+    }
+
+
+    modal.classList.add("active");
+
+    document.body.style.overflow =
+        "hidden";
 
 }
 
 
-/* =========================================================
-   9. FAQ
-   ========================================================= */
+/* =====================================================
+   CLOSE MODAL
+   ===================================================== */
 
-function initFAQ() {
+function closeInfoModal() {
 
-    const faqItems =
-        document.querySelectorAll(
-            ".faq-item"
+    const modal =
+        document.getElementById(
+            "infoModal"
         );
 
 
-    faqItems.forEach(item => {
-
-        item.addEventListener(
-            "toggle",
-            () => {
-
-                if (!item.open) {
-                    return;
-                }
+    if (!modal) return;
 
 
-                faqItems.forEach(otherItem => {
+    modal.classList.remove(
+        "active"
+    );
 
-                    if (
-                        otherItem !== item &&
-                        otherItem.open
-                    ) {
 
-                        otherItem.open = false;
-
-                    }
-
-                });
-
-            }
-        );
-
-    });
+    document.body.style.overflow =
+        "";
 
 }
 
 
-/* =========================================================
-   10. SMOOTH SCROLL
-   ========================================================= */
+/* =====================================================
+   SMOOTH SCROLL
+   ===================================================== */
 
 function initSmoothScroll() {
 
-    const links =
-        document.querySelectorAll(
-            'a[href^="#"]'
-        );
-
-
-    links.forEach(link => {
+    document.querySelectorAll(
+        'a[href^="#"]'
+    ).forEach(link => {
 
         link.addEventListener(
             "click",
             event => {
 
                 const targetId =
-                    link.getAttribute("href");
+                    link.getAttribute(
+                        "href"
+                    );
 
 
                 if (
@@ -1074,9 +843,7 @@ function initSmoothScroll() {
                     );
 
 
-                if (!target) {
-                    return;
-                }
+                if (!target) return;
 
 
                 event.preventDefault();
@@ -1095,69 +862,73 @@ function initSmoothScroll() {
 }
 
 
-/* =========================================================
-   11. CURRENT YEAR
-   ========================================================= */
+/* =====================================================
+   SOCIAL MEDIA
+   ===================================================== */
 
-function initCurrentYear() {
+function initSocialLinks() {
 
-    const yearElements =
-        document.querySelectorAll(
-            "[data-current-year]"
-        );
+    const socialLinks = {
+
+        instagram:
+            CONFIG.INSTAGRAM_URL,
+
+        tiktok:
+            CONFIG.TIKTOK_URL,
+
+        facebook:
+            CONFIG.FACEBOOK_URL
+
+    };
 
 
-    yearElements.forEach(element => {
+    Object.entries(
+        socialLinks
+    ).forEach(
+        ([platform, url]) => {
 
-        element.textContent =
-            new Date().getFullYear();
+            const links =
+                document.querySelectorAll(
+                    `[data-social="${platform}"]`
+                );
 
-    });
+
+            links.forEach(link => {
+
+                if (url) {
+
+                    link.href = url;
+
+                    link.target = "_blank";
+
+                    link.rel =
+                        "noopener noreferrer";
+
+                } else {
+
+                    link.style.display =
+                        "none";
+
+                }
+
+            });
+
+        }
+    );
 
 }
 
 
-/* =========================================================
-   12. MINIMUM EVENT DATE
-   ========================================================= */
+/* =====================================================
+   GLOBAL CONFIG
+   ===================================================== */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+window.GRITO = {
 
-        const dateInput =
-            document.querySelector(
-                "#event-date"
-            );
+    CONFIG,
 
+    eventData,
 
-        if (!dateInput) {
-            return;
-        }
+    createWhatsAppMessage
 
-
-        const today =
-            new Date();
-
-
-        const year =
-            today.getFullYear();
-
-
-        const month =
-            String(
-                today.getMonth() + 1
-            ).padStart(2, "0");
-
-
-        const day =
-            String(
-                today.getDate()
-            ).padStart(2, "0");
-
-
-        dateInput.min =
-            `${year}-${month}-${day}`;
-
-    }
-);
+};
